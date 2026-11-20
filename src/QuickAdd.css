@@ -1,0 +1,75 @@
+html,
+body,
+#root {
+  min-width: 0;
+  font-size: 13px;
+}
+
+.app-shell {
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.quick-add {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 8px 14px;
+  background: #252629;
+}
+
+.quick-add input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  color: #e3e6ec;
+  background: #1e1f22;
+  border: 1px solid #45484f;
+  border-radius: 6px;
+  outline: none;
+  font: 15px "Segoe UI", "Yu Gothic UI", sans-serif;
+}
+
+.quick-add input:focus {
+  border-color: #6ea7ff;
+  box-shadow: 0 0 0 2px rgb(110 167 255 / 15%);
+}
+
+.quick-add input[aria-invalid="true"] {
+  border-color: #d97777;
+}
+
+:root[data-theme="light"] .quick-add {
+  background: #e9edf2;
+}
+
+:root[data-theme="light"] .quick-add input {
+  color: #29313d;
+  background: #fff;
+  border-color: #d2d8e1;
+}
+
+:root[data-theme="nord"] .quick-add {
+  background: #3b4252;
+}
+
+:root[data-theme="nord"] .quick-add input {
+  color: #eceff4;
+  background: #353c49;
+  border-color: #4c566a;
+}
+
+:root[data-theme="mocha"] .quick-add {
+  background: #242438;
+}
+
+:root[data-theme="mocha"] .quick-add input {
+  color: #cdd6f4;
+  background: #181825;
+  border-color: #45445a;
+}
