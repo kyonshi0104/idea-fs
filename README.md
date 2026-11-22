@@ -32,7 +32,7 @@
 
 ### Windows
 
-1. [Releases](https://github.com/<username>/<repo>/releases) から `IdeaFS_<version>_x64-setup.exe` をダウンロードして実行
+1. [Releases](https://github.com/kyonshi0104/idea-fs/releases) から `IdeaFS_<version>_x64-setup.exe` をダウンロードして実行
 2. インストール時にユーザー環境変数 `PATH` へ自動登録
 3. 新しいターミナルを開き、`idfs --help` で動作確認
 
