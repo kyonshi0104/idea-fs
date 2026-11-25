@@ -72,15 +72,18 @@ pub fn idea_path(root: &Path, filepath: &str) -> Result<PathBuf, String> {
             category_path.display()
         )
     })?;
+
     if !canonical_category.starts_with(&canonical_root) || !canonical_category.is_dir() {
         return Err("Idea category is outside the data directory".to_owned());
     }
     let canonical_path = path
         .canonicalize()
         .map_err(|error| format!("Failed to access {}: {error}", path.display()))?;
+        
     if !canonical_path.starts_with(canonical_root) || !canonical_path.is_file() {
         return Err("Idea file path is outside the data directory".to_owned());
     }
+
     Ok(canonical_path)
 }
 
