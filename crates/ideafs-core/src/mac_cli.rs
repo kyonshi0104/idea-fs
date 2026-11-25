@@ -1,3 +1,4 @@
+#[cfg(target_os = "macos")]
 use std::{fs, path::Path};
 
 #[cfg(target_os = "macos")]
