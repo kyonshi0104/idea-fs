@@ -1,13 +1,11 @@
 use std::{fs, path::Path};
 
-use crate::{
-    category::{category_directories, category_status},
-    idea::{
-        collect_idea_tree, create_idea_in_directory, idea_path, parse_file, prepare_data_root,
-        resolve_status_directory,
-    },
-    models::{FileData, MetaData, TreeData},
+use ideafs_core::{
+    category_directories, category_status, collect_idea_tree, create_idea_in_directory, idea_path,
+    parse_file, resolve_status_directory, FileData, MetaData, TreeData,
 };
+
+use crate::paths::prepare_data_root;
 
 #[tauri::command]
 pub fn create_idea(

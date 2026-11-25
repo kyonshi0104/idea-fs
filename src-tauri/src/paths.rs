@@ -1,16 +1,11 @@
-use std::path::PathBuf;
+use std::{fs, path::PathBuf};
 
-use tauri::Manager;
+use ideafs_core::ensure_default_categories;
 
-pub fn data_root() -> Result<PathBuf, String> {
-    dirs::document_dir()
-        .map(|directory| directory.join("IdeaFS"))
-        .ok_or_else(|| "Could not resolve the user's Documents directory".to_owned())
-}
-
-pub(crate) fn app_data_root(app: &tauri::AppHandle) -> Result<PathBuf, String> {
-    app.path()
-        .document_dir()
-        .map(|directory| directory.join("IdeaFS"))
-        .map_err(|error| format!("Failed to resolve the user's Documents directory: {error}"))
+pub(crate) fn prepare_data_root(_app: &tauri::AppHandle) -> Result<PathBuf, String> {
+    let root = ideafs_core::data_root()?;
+    fs::create_dir_all(&root)
+        .map_err(|error| format!("Failed to create {}: {error}", root.display()))?;
+    ensure_default_categories(&root)?;
+    Ok(root)
 }

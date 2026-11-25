@@ -1,8 +1,7 @@
 use std::path::PathBuf;
 
+use ideafs_core::{read_icon_data_url, validate_http_url};
 use tauri_plugin_opener::OpenerExt;
-
-use crate::{icon::read_icon_data_url, url::validate_http_url};
 
 #[tauri::command]
 pub fn open_resource(app: tauri::AppHandle, path: String) -> Result<(), String> {

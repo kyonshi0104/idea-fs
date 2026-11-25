@@ -1,6 +1,6 @@
 use url::Url;
 
-pub(crate) fn validate_http_url(url: &str) -> Result<String, String> {
+pub fn validate_http_url(url: &str) -> Result<String, String> {
     let parsed = Url::parse(url).map_err(|error| format!("Invalid URL: {error}"))?;
     if !matches!(parsed.scheme(), "http" | "https") || parsed.host_str().is_none() {
         return Err("Only HTTP and HTTPS URLs can be opened".to_owned());

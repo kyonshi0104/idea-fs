@@ -11,7 +11,7 @@ use crate::{
         category_directories, category_status, ensure_default_categories, resolve_category_query,
     },
     models::{CliIdea, FileData, IdeaFile, IdeaFolder, MetaData, TreeData},
-    paths::{app_data_root, data_root},
+    paths::data_root,
 };
 
 fn non_empty(value: Option<String>) -> Option<String> {
@@ -39,7 +39,7 @@ fn sanitize_filename(name: &str) -> String {
     }
 }
 
-pub(crate) fn idea_path(root: &Path, filepath: &str) -> Result<PathBuf, String> {
+pub fn idea_path(root: &Path, filepath: &str) -> Result<PathBuf, String> {
     let relative_path = Path::new(filepath);
     let mut components = relative_path.components();
     let status_dir = components
@@ -84,7 +84,7 @@ pub(crate) fn idea_path(root: &Path, filepath: &str) -> Result<PathBuf, String> 
     Ok(canonical_path)
 }
 
-pub(crate) fn parse_file(filepath: String, path: &Path) -> Result<FileData, String> {
+pub fn parse_file(filepath: String, path: &Path) -> Result<FileData, String> {
     let raw = fs::read_to_string(path)
         .map_err(|error| format!("Failed to read {}: {error}", path.display()))?;
     let frontmatter = raw
@@ -109,7 +109,7 @@ pub(crate) fn parse_file(filepath: String, path: &Path) -> Result<FileData, Stri
     })
 }
 
-pub(crate) fn create_idea_in_directory(
+pub fn create_idea_in_directory(
     root: &Path,
     directory: &str,
     title: &str,
@@ -192,7 +192,7 @@ pub(crate) fn create_idea_in_directory(
     unreachable!("the filename suffix range is unbounded")
 }
 
-pub(crate) fn collect_idea_tree(root: &Path) -> Result<TreeData, String> {
+pub fn collect_idea_tree(root: &Path) -> Result<TreeData, String> {
     fs::create_dir_all(root)
         .map_err(|error| format!("Failed to create {}: {error}", root.display()))?;
     ensure_default_categories(root)?;
@@ -253,15 +253,7 @@ pub(crate) fn collect_idea_tree(root: &Path) -> Result<TreeData, String> {
     Ok(TreeData { folders })
 }
 
-pub(crate) fn prepare_data_root(app: &tauri::AppHandle) -> Result<PathBuf, String> {
-    let root = app_data_root(app)?;
-    fs::create_dir_all(&root)
-        .map_err(|error| format!("Failed to create {}: {error}", root.display()))?;
-    ensure_default_categories(&root)?;
-    Ok(root)
-}
-
-pub(crate) fn resolve_status_directory(
+pub fn resolve_status_directory(
     root: &Path,
     status: &str,
 ) -> Result<String, String> {

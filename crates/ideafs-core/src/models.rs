@@ -19,27 +19,27 @@ pub struct MetaData {
 
 #[derive(Serialize)]
 pub struct IdeaFile {
-    pub(crate) filepath: String,
-    pub(crate) metadata: MetaData,
+    pub filepath: String,
+    pub metadata: MetaData,
 }
 
 #[derive(Serialize)]
 pub struct IdeaFolder {
-    pub(crate) name: String,
-    pub(crate) status: String,
-    pub(crate) files: Vec<IdeaFile>,
+    pub name: String,
+    pub status: String,
+    pub files: Vec<IdeaFile>,
 }
 
 #[derive(Serialize)]
 pub struct TreeData {
-    pub(crate) folders: Vec<IdeaFolder>,
+    pub folders: Vec<IdeaFolder>,
 }
 
 #[derive(Serialize)]
 pub struct FileData {
-    pub(crate) filepath: String,
-    pub(crate) metadata: MetaData,
-    pub(crate) content: String,
+    pub filepath: String,
+    pub metadata: MetaData,
+    pub content: String,
 }
 
 #[derive(Clone, Debug)]

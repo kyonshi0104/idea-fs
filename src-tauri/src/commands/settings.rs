@@ -1,10 +1,9 @@
+use ideafs_core::{data_root, install_mac_cli, is_mac_cli_installed};
 use serde::Serialize;
 
 use crate::{
     config::{AppConfig, read_app_config, write_app_config},
     shortcuts::restore_shortcut,
-    mac_cli::{install_mac_cli, is_mac_cli_installed},
-    paths::app_data_root,
 };
 
 #[derive(Serialize)]
@@ -43,8 +42,8 @@ pub fn set_global_shortcut(app: tauri::AppHandle, shortcut: Option<String>) -> R
 }
 
 #[tauri::command]
-pub fn get_app_settings(app: tauri::AppHandle) -> Result<AppSettings, String> {
-    let data_directory = app_data_root(&app)?;
+pub fn get_app_settings(_app: tauri::AppHandle) -> Result<AppSettings, String> {
+    let data_directory = data_root()?;
 
     Ok(AppSettings {
         data_directory: data_directory.to_string_lossy().into_owned(),

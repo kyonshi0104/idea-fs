@@ -1,9 +1,8 @@
-use crate::{
-    category::{
-        create_category_directory, delete_category_directory, rename_category_directory,
-    },
-    idea::prepare_data_root,
+use ideafs_core::{
+    create_category_directory, delete_category_directory, rename_category_directory,
 };
+
+use crate::paths::prepare_data_root;
 
 #[tauri::command]
 pub fn create_category(app: tauri::AppHandle, name: String) -> Result<String, String> {

@@ -17,7 +17,7 @@ pub(crate) fn mac_cli_executable() -> Result<std::path::PathBuf, String> {
     Ok(cli_executable)
 }
 
-pub(crate) fn is_mac_cli_installed() -> Result<bool, String> {
+pub fn is_mac_cli_installed() -> Result<bool, String> {
     #[cfg(target_os = "macos")]
     {
         let link = Path::new("/usr/local/bin/idfs");
@@ -36,7 +36,7 @@ pub(crate) fn is_mac_cli_installed() -> Result<bool, String> {
     }
 }
 
-pub(crate) fn install_mac_cli() -> Result<(), String> {
+pub fn install_mac_cli() -> Result<(), String> {
     #[cfg(target_os = "macos")]
     {
         use std::os::unix::fs::symlink;

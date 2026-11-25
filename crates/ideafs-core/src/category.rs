@@ -9,7 +9,7 @@ const DEFAULT_CATEGORIES: [(&str, &str); 4] = [
     ("04_Graveyard", "graveyard"),
 ];
 
-pub(crate) fn category_status(directory: &str) -> String {
+pub fn category_status(directory: &str) -> String {
     match category_prefix(directory) {
         Some(1) => "inbox".to_owned(),
         Some(2) => "backlog".to_owned(),
@@ -50,7 +50,7 @@ pub(crate) fn sort_categories(categories: &mut [String]) {
     });
 }
 
-pub(crate) fn ensure_default_categories(root: &Path) -> Result<(), String> {
+pub fn ensure_default_categories(root: &Path) -> Result<(), String> {
     let existing = category_directories(root)?;
     for (directory, status) in DEFAULT_CATEGORIES {
         if existing
@@ -66,7 +66,7 @@ pub(crate) fn ensure_default_categories(root: &Path) -> Result<(), String> {
     Ok(())
 }
 
-pub(crate) fn category_directories(root: &Path) -> Result<Vec<String>, String> {
+pub fn category_directories(root: &Path) -> Result<Vec<String>, String> {
     let canonical_root = root
         .canonicalize()
         .map_err(|error| format!("Failed to access idea data directory: {error}"))?;
@@ -125,7 +125,7 @@ pub(crate) fn sanitize_category_name(name: &str) -> Result<String, String> {
     Ok(sanitized.to_owned())
 }
 
-pub(crate) fn create_category_directory(root: &Path, name: &str) -> Result<String, String> {
+pub fn create_category_directory(root: &Path, name: &str) -> Result<String, String> {
     let name = sanitize_category_name(name)?;
     let categories = category_directories(root)?;
     let next_prefix = categories
@@ -163,7 +163,7 @@ fn rewrite_frontmatter_status(raw: &str, status: &str) -> Result<String, String>
     Ok(format!("---\n{yaml}---{body_suffix}"))
 }
 
-pub(crate) fn rename_category_directory(
+pub fn rename_category_directory(
     root: &Path,
     current_directory: &str,
     name: &str,
@@ -253,7 +253,7 @@ pub(crate) fn rename_category_directory(
     Ok(new_directory)
 }
 
-pub(crate) fn delete_category_directory(root: &Path, directory: &str) -> Result<(), String> {
+pub fn delete_category_directory(root: &Path, directory: &str) -> Result<(), String> {
     if !category_directories(root)?
         .iter()
         .any(|category| category == directory)

@@ -8,7 +8,7 @@ use base64::{Engine, engine::general_purpose::STANDARD as BASE64};
 
 const MAX_ICON_BYTES: u64 = 5 * 1024 * 1024;
 
-pub(crate) fn read_icon_data_url(path: String) -> Result<String, String> {
+pub fn read_icon_data_url(path: String) -> Result<String, String> {
     let path = std::path::PathBuf::from(path);
     if !path.is_absolute() || !path.is_file() {
         return Err("Icon path must be an existing absolute file path".to_owned());
