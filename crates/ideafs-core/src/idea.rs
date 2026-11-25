@@ -253,10 +253,7 @@ pub fn collect_idea_tree(root: &Path) -> Result<TreeData, String> {
     Ok(TreeData { folders })
 }
 
-pub fn resolve_status_directory(
-    root: &Path,
-    status: &str,
-) -> Result<String, String> {
+pub fn resolve_status_directory(root: &Path, status: &str) -> Result<String, String> {
     let categories = category_directories(root)?;
     categories
         .iter()

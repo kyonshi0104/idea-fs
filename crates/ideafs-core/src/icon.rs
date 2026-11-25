@@ -1,8 +1,4 @@
-use std::{
-    fs,
-    io::Read,
-    path::Path,
-};
+use std::{fs, io::Read, path::Path};
 
 use base64::{Engine, engine::general_purpose::STANDARD as BASE64};
 

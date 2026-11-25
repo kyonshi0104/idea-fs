@@ -11,7 +11,10 @@ pub(crate) fn register_saved_shortcut(app: &tauri::AppHandle) -> Result<(), Stri
     Ok(())
 }
 
-pub(crate) fn restore_shortcut(app: &tauri::AppHandle, shortcut: Option<&str>) -> Result<(), String> {
+pub(crate) fn restore_shortcut(
+    app: &tauri::AppHandle,
+    shortcut: Option<&str>,
+) -> Result<(), String> {
     app.global_shortcut()
         .unregister_all()
         .map_err(|error| format!("Failed to unregister global shortcuts: {error}"))?;
