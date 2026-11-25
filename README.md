@@ -23,7 +23,7 @@
 
 ## Features
 
-- **GUI / CLI 構成**: デスクトップUI（`ideafs`）とCLI（`idfs`）の2バイナリ構成
+- **GUI / CLI 構成**: デスクトップUI（`ideafs`）とCLI（`idfs`）の2バイナリ構成（共有ロジックは [`crates/ideafs-core`](crates/ideafs-core)、Tauri シェルは [`src-tauri`](src-tauri)）
 - **Quick Add**: グローバルショートカット（初期値: `Ctrl+Alt+I` / `Cmd+Alt+I`）から記録
 - **省メモリ常駐**: ウィンドウを閉じるとWebViewを破棄し、システムトレイで待機
 - **自動アップデート**: GitHub Releases による更新に対応

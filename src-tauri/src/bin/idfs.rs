@@ -121,7 +121,7 @@ fn run_cli(cli: Cli) -> Result<(), String> {
             url,
         } => {
             let filepath =
-                idea_explorer_lib::cli_add_idea(&title, category.as_deref(), tags, resource, url)?;
+                ideafs_core::cli_add_idea(&title, category.as_deref(), tags, resource, url)?;
             println!("Saved: {filepath}");
             Ok(())
         }
@@ -133,7 +133,7 @@ fn run_cli(cli: Cli) -> Result<(), String> {
 }
 
 fn list_ideas(category: Option<&str>) -> Result<(), String> {
-    let ideas = idea_explorer_lib::cli_list_ideas(category)?;
+    let ideas = ideafs_core::cli_list_ideas(category)?;
     if ideas.is_empty() {
         println!("No ideas found.");
         return Ok(());
@@ -175,7 +175,7 @@ fn remove_idea(query: &str, force: bool) -> Result<(), String> {
                     return Ok(());
                 }
             }
-            idea_explorer_lib::cli_delete_idea(&idea.filepath)?;
+            ideafs_core::cli_delete_idea(&idea.filepath)?;
             println!("Deleted: {}", idea.filepath);
             Ok(())
         }
@@ -218,12 +218,12 @@ fn open_idea(query: &str) -> Result<(), String> {
     open::that(target).map_err(|error| format!("Failed to open {target}: {error}"))
 }
 
-fn find_ideas(query: &str) -> Result<Vec<idea_explorer_lib::CliIdea>, String> {
+fn find_ideas(query: &str) -> Result<Vec<ideafs_core::CliIdea>, String> {
     let query = query.trim().to_lowercase();
     if query.is_empty() {
         return Err("Search query cannot be empty".to_owned());
     }
-    let ideas = idea_explorer_lib::cli_list_ideas(None)?;
+    let ideas = ideafs_core::cli_list_ideas(None)?;
     Ok(ideas
         .into_iter()
         .filter(|idea| {
